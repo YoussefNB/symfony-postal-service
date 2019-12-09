@@ -73,11 +73,10 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('user-show',['id'=>$user->getId(),
-            ]);
+            return $this->redirectToRoute('login');
         }
 
-        return $this->render('user/user-add.html.twig',
+        return $this->render('user-add.html.twig',
             array('form' => $form->createView())
         );
     }
@@ -86,9 +85,10 @@ class UserController extends AbstractController
      * @Route("/user/show/{id}", name="user-show")
      */
     public function showUser(User $user)
-    {
+
+    {   $test = $user->getUserPackages()->unwrap()->toArray();
         return $this->render('user/show-user.html.twig',[
-            'user'=>$user,
+            'user'=>$user,'test'=>$test
         ]);
     }
 

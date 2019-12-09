@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -61,9 +63,21 @@ class User implements UserInterface
      */
     private $roles;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Package", mappedBy="owner")
+     */
+    private $userPackages;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Package", mappedBy="courrier")
+     */
+    private $courrierPackages;
+
     public function __construct()
     {
       $this->roles = array('ROLE_USER');
+      $this->userPackages = new ArrayCollection();
+      $this->courrierPackages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -142,7 +156,7 @@ class User implements UserInterface
     {
         return $this->plainPassword;
     }
-    
+
     public function setPlainPassword($password)
     {
         $this->plainPassword = $password;
@@ -167,5 +181,67 @@ class User implements UserInterface
 
     public function getUsername() {
         return $this->email;
+    }
+
+    /**
+     * @return Collection|Package[]
+     */
+    public function getUserPackages(): Collection
+    {
+        return $this->userPackages;
+    }
+
+    public function addUserPackage(Package $userPackage): self
+    {
+        if (!$this->userPackages->contains($userPackage)) {
+            $this->userPackages[] = $userPackage;
+            $userPackage->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserPackage(Package $userPackage): self
+    {
+        if ($this->userPackages->contains($userPackage)) {
+            $this->userPackages->removeElement($userPackage);
+            // set the owning side to null (unless already changed)
+            if ($userPackage->getOwner() === $this) {
+                $userPackage->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Package[]
+     */
+    public function getCourrierPackages(): Collection
+    {
+        return $this->courrierPackages;
+    }
+
+    public function addCourrierPackage(Package $courrierPackage): self
+    {
+        if (!$this->courrierPackages->contains($courrierPackage)) {
+            $this->courrierPackages[] = $courrierPackage;
+            $courrierPackage->setCourrier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCourrierPackage(Package $courrierPackage): self
+    {
+        if ($this->courrierPackages->contains($courrierPackage)) {
+            $this->courrierPackages->removeElement($courrierPackage);
+            // set the owning side to null (unless already changed)
+            if ($courrierPackage->getCourrier() === $this) {
+                $courrierPackage->setCourrier(null);
+            }
+        }
+
+        return $this;
     }
 }

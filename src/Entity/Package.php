@@ -38,16 +38,6 @@ class Package
     private $weight;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $ownerId;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $courrierId;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private $status;
@@ -63,6 +53,24 @@ class Package
      */
     private $imageFile;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="userPackages")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $owner;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="courrierPackages")
+     */
+    private $courrier;
+
+
+    public function __construct()
+    {
+      $this->status = false;
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -77,30 +85,6 @@ class Package
     public function setWeight(float $weight): self
     {
         $this->weight = $weight;
-
-        return $this;
-    }
-
-    public function getOwnerId(): ?int
-    {
-        return $this->ownerId;
-    }
-
-    public function setOwnerId(int $ownerId): self
-    {
-        $this->ownerId = $ownerId;
-
-        return $this;
-    }
-
-    public function getCourrierId(): ?int
-    {
-        return $this->courrierId;
-    }
-
-    public function setCourrierId(int $courrierId): self
-    {
-        $this->courrierId = $courrierId;
 
         return $this;
     }
@@ -156,6 +140,30 @@ class Package
  
     public function setImageFile(File $image=null) :self {
         $this->imageFile = $image;
+        return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->ownerId;
+    }
+
+    public function setOwner(?User $ownerId): self
+    {
+        $this->ownerId = $ownerId;
+
+        return $this;
+    }
+
+    public function getCourrier(): ?User
+    {
+        return $this->courrierId;
+    }
+
+    public function setCourrier(?User $courrierId): self
+    {
+        $this->courrierId = $courrierId;
+
         return $this;
     }
 }
