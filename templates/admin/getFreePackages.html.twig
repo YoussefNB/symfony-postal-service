@@ -1,6 +1,6 @@
 {% extends 'admin/admin-base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Free Packages{% endblock %}
 
 {% block content %}
 <style>
@@ -60,7 +60,7 @@
                     </div>
                 </div>
             </td>
-            <td><a type="button" class="btn btn-warning"
+            <td><a class="btn btn-warning"
                     href="{{path('courrier-add-package',{'id':package.id})}}">Deliver</a></td>
         </tr>
         {% endfor %}

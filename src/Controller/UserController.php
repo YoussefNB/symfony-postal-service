@@ -83,10 +83,12 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user/showPackages/{id}", name="showtest")
+     * @Route("/user/showPackages", name="user-show-packages")
      */
-    public function showUserPackages(User $user)
+    public function showUserPackages(Request $request)
     {
+        $user = $this->getUser();
+
         $repository = $this->getDoctrine()
         ->getRepository(Package::class);
 

@@ -44,5 +44,25 @@ class PackageController extends AbstractController
             array('form' => $form->createView(),'user'=>$user)
         );
     }
+
+    /**
+     * @Route("/courrier/changePackageStatus/{id}", name="change-status-package")
+     */
+    public function changePackageStatus(Request $request,$id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $package = $entityManager->getRepository(Package::class)->find($id);
+
+        if (!$package) {
+        throw $this->createNotFoundException(
+            'Error bro >.<'
+        );
+    }
+
+    $package->setStatus(true);
+    $entityManager->flush();
+
+    return $this->redirectToRoute('courrier-my-packages');
+    }
     
 }

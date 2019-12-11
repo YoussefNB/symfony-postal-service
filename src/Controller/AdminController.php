@@ -34,9 +34,7 @@ class AdminController extends AbstractController
         );    
 
         if (!$freePackages) {
-            throw $this->createNotFoundException(
-                'No free packages found.'
-            );
+            return $this->render('admin/errorNoPackagesFound.html.twig');
         }
 
         return $this->render('admin/getFreePackages.html.twig', [
@@ -57,9 +55,7 @@ class AdminController extends AbstractController
         );
 
         if (!$myPackages) {
-            throw $this->createNotFoundException(
-                'No packages managed by me were found.'
-            );
+            return $this->render('admin/errorNoPackagesFound.html.twig');
         }
 
         return $this->render('admin/getMyPackages.html.twig', [
@@ -86,4 +82,7 @@ class AdminController extends AbstractController
 
     return $this->redirectToRoute('courrier-free-packages');
     }
+
 }
+
+
