@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\Entity\User;
+use App\Entity\Package;
 use App\Controller\Response;
 use App\Form\UserType;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -24,7 +25,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/", name="login")
+     * @Route("/", name="security_login")
      */
 
     public function login(AuthenticationUtils $authenticationUtils)
@@ -82,13 +83,25 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user/show/{id}", name="user-show")
+     * @Route("/user/showPackages/{id}", name="showtest")
      */
-    public function showUser(User $user)
+    public function showUserPackages(User $user)
+    {
+        $repository = $this->getDoctrine()
+        ->getRepository(Package::class);
 
-    {   $test = $user->getUserPackages()->unwrap()->toArray();
-        return $this->render('user/show-user.html.twig',[
-            'user'=>$user,'test'=>$test
+        $packages = $repository->findBy(
+            ['owner' => $user->getId()]
+        );    
+
+        if (!$packages) {
+            throw $this->createNotFoundException(
+                'No packages found for userID :  '.$user->getId()
+            );
+        }
+
+        return $this->render('user/showUserPackages.html.twig', [
+            'user' =>$user,'packages'=>$packages
         ]);
     }
 

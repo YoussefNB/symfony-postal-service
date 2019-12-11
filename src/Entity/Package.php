@@ -145,24 +145,24 @@ class Package
 
     public function getOwner(): ?User
     {
-        return $this->ownerId;
+        return $this->owner;
     }
 
     public function setOwner(?User $ownerId): self
     {
-        $this->ownerId = $ownerId;
+        $this->owner = $ownerId;
 
         return $this;
     }
 
     public function getCourrier(): ?User
     {
-        return $this->courrierId;
+        return $this->courrier;
     }
 
     public function setCourrier(?User $courrierId): self
     {
-        $this->courrierId = $courrierId;
+        $this->courrier = $courrierId;
 
         return $this;
     }
