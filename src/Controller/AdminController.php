@@ -30,7 +30,8 @@ class AdminController extends AbstractController
         ->getRepository(Package::class);
 
         $freePackages = $repository->findBy(
-            ['courrier' => NULL]
+            ['courrier' => NULL],
+            ['id' => 'DESC']
         );    
 
         if (!$freePackages) {
@@ -51,7 +52,8 @@ class AdminController extends AbstractController
         ->getRepository(Package::class);
 
         $myPackages = $repository->findBy(
-            ['courrier' => $this->getUser()->getId()]
+            ['courrier' => $this->getUser()->getId()],
+            ['id' => 'DESC']
         );
 
         if (!$myPackages) {

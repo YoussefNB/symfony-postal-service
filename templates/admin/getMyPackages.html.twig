@@ -15,9 +15,12 @@
         background: #F5F5F5;
         padding: 2px 6px;
     }
+    .h {
+        height:100vh
+    }
 </style>
 
-<div style="width:1000px;">
+<div class="h">
     <table class="table">
         <thead>
             <tr>
@@ -44,31 +47,33 @@
                 {% else %}
                 <td><p class="text-default">Delivered ✅ </p></td>
                 {% endif %}
-                <td><a data-toggle="modal" data-target="#{{package.id}}">{{package.image}}</a>
+                <td><a data-toggle="modal" data-target="#myModal{{package.id}}">{{package.image}}</a>
                     <!-- Modal --> 
-                    <div class="modal fade" id="{{package.id}}" tabindex="-1" role="dialog"
+                    <div class="modal fade" id="myModal{{package.id}}" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Package picture</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <img width="150" height="150" src="/images/packages/{{package.image}}"/>
+                                    <img width="450" height="450" src="/images/packages/{{package.image}}"/>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </td>
-                <td><a class="btn btn-warning"
-                        href="{{path('change-status-package',{'id':package.id})}}">Change status to delivered!</a></td>
+                {% if (package.status == false) %}
+                <td>
+                    <a class="btn btn-outline-success waves-effect" href="{{path('change-status-package',{'id':package.id})}}">Change status to delivered!</a>
+                </td>
+                {% endif %}
             </tr>
             {% endfor %}
         </tbody>
