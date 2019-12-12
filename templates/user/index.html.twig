@@ -6,15 +6,156 @@
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    .section-1 {
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        padding:50px;
+        height:520px;
+    }
+    .section-1-text {
+        text-align:center;
+    }
+    .wrap {
+        width: 100%;
+    }
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    .image {
+        background-image: url("https://images.axios.com/XF4j5nnOY13g4A9XvD4M4MrJp4k=/0x0:1920x1080/1920x1080/2019/05/21/1558466485906.png");
+        background-repeat: no-repeat;
+        background-position: top;
+        position: relative;
+        height: 87vh;
+        background-size: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+    }
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/rabeh_symfony_tp1/src/Controller/UserController.php'|file_link(0) }}">src/Controller/UserController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/rabeh_symfony_tp1/templates/user/index.html.twig'|file_link(0) }}">templates/user/index.html.twig</a></code></li>
-    </ul>
+    .image:before {
+        content: '';
+        position:absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .text {
+        color:white;
+        position: relative;
+        padding: 50px;
+        width: 700px;
+        margin-right:100px
+    }
+
+    .partners {
+        display:flex;
+        flex-direction:row;
+        justify-content:space-evenly;
+        align-items:center;
+        flex-wrap:wrap;
+        padding:30px 0px 30px 0px;
+    }
+
+    .postal-service-display {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        text-align:center;
+        width:300px;
+        padding-top:20px 0px 20px 0px;
+    }
+
+    .postal-service-image {
+        width: 96;
+        height: 96;
+    }
+
+    .functionality {
+        padding:20px 0px 10px 0px;
+        display:flex;
+        flex-direction:row;
+        justify-content:space-around;
+        align-items:center;
+    }
+
+    .functionalities {
+        display:flex;
+        flex-direction:column;
+    }
+
+    .img-functionalities {
+        width:400;
+        height:400px;
+    }
+    </style>
+
+<div>
+    <div class="wrap">
+        <div class="image">
+            <div class="text">
+                <div>
+                    <h1 id="intro-title" class="h1-responsive">🙋‍♂️ Welcome to Yo's Postal Serice</h1>
+                    <h3 class="h3-responsive">Your fastest and most reliable postal service <b>in Tunisia</b> &#128523;!</h3>
+                    <br>
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam. nde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<div class="container functionalities">
+    <div class="functionality">
+        <div>
+            <img class="img-functionalities" src="https://images-na.ssl-images-amazon.com/images/I/61PsZjLDNqL._SX466_.jpg">
+        </div>
+        <div style="padding-left:30px;">
+            <h2><a href="{{path('add-package')}}"><b>Send your package<b></a></h2>
+            <h3>i cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impeditsuece</h3>
+        </div>
+    </div>
+    <div class="functionality">
+        <div style="padding:0px 10px 0px 30px;text-align:left;">
+            <h2><a href="{{path('user-show-packages')}}"><b>Check your packages<b></a></h2>
+            <h3>i cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impeditsuece</h3>
+        </div>
+        <div>
+            <img class="img-functionalities" src="https://www.secur-tek.com/wp-content/uploads/2018/12/bigstock-Delivered-parcels-on-floor-nea-222453736.jpg">
+        </div>
+    </div>
+</div>
+
+<div class="container" style="display:flex;flex-direction:column;padding-top:20px">
+    <h3 style="text-align:center">Our partners :</h3>
+    <div class="partners">
+        <div class="postal-service-display" style="border-left:1px solid lightblue;">
+            <img src="https://img.icons8.com/windows/96/000000/ups.png">    
+            <h2 style="color:#33b5e5">UPS</h2>    
+            <p>or sit voluptatem accusantium doloremque laudantium, totam rem aperiamque laudantptatem accu..</p>
+            <button type="button" class="btn btn-outline-info waves-effect">Visit site</button>
+        </div>
+        <div class="postal-service-display">
+            <img src="https://img.icons8.com/windows/96/000000/fedex.png">   
+            <h2 style="color:#33b5e5">FEDEX</h2>     
+            <p>or sit voluptatem accusantium doloremque laudantium, totam rem aperiamque laudantptatem accu..</p>
+            <button type="button" class="btn btn-outline-info waves-effect">Visit site</button>
+        </div>
+        <div class="postal-service-display" style="border-right:1px solid lightblue;">
+            <img src="https://img.icons8.com/windows/96/000000/usps.png">    
+            <h2 style="color:#33b5e5">USPS</h2>    
+            <p>or sit voluptatem accusantium doloremque laudantium, totam rem aperiamque laudantptatem accu..</p>
+            <button type="button" class="btn btn-outline-info waves-effect">Visit site</button>
+        </div>
+    </div>
+<div>
+
 {% endblock %}

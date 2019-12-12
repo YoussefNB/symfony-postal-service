@@ -37,7 +37,7 @@ class PackageController extends AbstractController
             // ... do any other work - like sending them an email, etc
             // maybe set a "flash" success message for the user
 
-            return $this->redirectToRoute('user');
+            return $this->redirectToRoute('user-show-packages');
         }
 
         return $this->render('package/addPackage.html.twig',

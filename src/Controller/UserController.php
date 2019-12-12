@@ -93,7 +93,62 @@ class UserController extends AbstractController
         ->getRepository(Package::class);
 
         $packages = $repository->findBy(
-            ['owner' => $user->getId()]
+            ['owner' => $user->getId()],
+            ['id' => 'DESC']
+        );    
+
+        if (!$packages) {
+            throw $this->createNotFoundException(
+                'No packages found for userID :  '.$user->getId()
+            );
+        }
+
+        return $this->render('user/showUserPackages.html.twig', [
+            'user' =>$user,'packages'=>$packages
+        ]);
+    }
+
+    /**
+     * @Route("/user/showDeliveredPackages", name="user-show-delivered-packages")
+     */
+    public function showUserDeliveredPackages(Request $request)
+    {
+        $user = $this->getUser();
+
+        $repository = $this->getDoctrine()
+        ->getRepository(Package::class);
+
+        $packages = $repository->findBy(
+            ['owner' => $user->getId(),
+             'status' => true],
+             ['id' => 'DESC']
+        );    
+
+        if (!$packages) {
+            throw $this->createNotFoundException(
+                'No packages found for userID :  '.$user->getId()
+            );
+        }
+
+        return $this->render('user/showUserPackages.html.twig', [
+            'user' =>$user,'packages'=>$packages
+        ]);
+    }
+
+    /**
+     * @Route("/user/showInProgressPackages", name="user-show-inProgress-packages")
+     */
+    public function showUserInProgressPackages(Request $request)
+    {
+        $user = $this->getUser();
+
+        $repository = $this->getDoctrine()
+        ->getRepository(Package::class);
+
+        $packages = $repository->findBy(
+            ['owner' => $user->getId(),
+             'status' => false],
+             ['id' => 'DESC']
         );    
 
         if (!$packages) {

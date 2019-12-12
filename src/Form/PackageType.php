@@ -16,10 +16,18 @@ class PackageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class)
-            ->add('destination', TextType::class)
-            ->add('weight', NumberType::class)
-            ->add('imageFile',VichImageType::class);
+            ->add('name', TextType::class, [
+                'attr' => ['class' => 'form-control']
+            ])
+            ->add('destination', TextType::class, [
+                'attr' => ['class' => 'form-control']
+                ])
+            ->add('weight', NumberType::class, [
+                'attr' => ['class' => 'form-control']
+                ])
+            ->add('imageFile',VichImageType::class, [
+                'attr' => ['class' => 'btn btn-primary']
+                ]);
             ;
     }
 

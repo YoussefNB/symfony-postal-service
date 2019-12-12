@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 <nav class="navbar navbar-expand-lg navbar-dark stylish-color">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#"><b>Yo's postal service</b></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -11,8 +11,15 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{{path('user')}}">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{path('user-show-packages')}}">My packages</a>
+                <!-- Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">My packages</a>
+                    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="{{path('user-show-packages')}}">All packages</a>
+                    <a class="dropdown-item" href="{{path('user-show-delivered-packages')}}">Packages delivered</a>
+                    <a class="dropdown-item" href="{{path('user-show-inProgress-packages')}}">Packages in progress</a>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{path('add-package')}}">Add a package</a>

@@ -1,6 +1,60 @@
 {% extends 'user/user-base.html.twig' %}
 {% block content %}
-<h3>Detail</h3>
-{{dump(user)}}
-{{dump(packages)}}
+<style>
+    .h {
+        height:100vh
+    }
+</style>
+<div class="h">
+<table class="table"> 
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">name</th>
+            <th scope="col">destination</th>
+            <th scope="col">weight</th>
+            <th scope="col">Photo</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for package in packages %}
+        <tr>
+            <th scope="row">{{package.id}}</th>
+            <td>{{package.name}}</td>
+            <td>{{package.destination}}</td>
+            <td>{{package.weight}}</td>
+            <td><a data-toggle="modal" data-target="#{{package.id}}">{{package.image}}</a>
+                <!-- Modal --> 
+                <div class="modal fade" id="{{package.id}}" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <img width="150" height="150" src="/images/packages/{{package.image}}"/>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            {% if(package.status == false) %}
+            <td><p class="text-danger">In progress 🚚..</p></td>
+            {% else %}
+            <td><p class="text-default">Delivered ✅ </p></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
 {% endblock %}
